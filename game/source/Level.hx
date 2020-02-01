@@ -15,16 +15,18 @@ class Level
 
 	public var _mWalls:FlxTilemap;
     public var _mFloor:FlxTilemap;
-
+ 
     var _map:FlxOgmoLoader;
     var _drone:object.Drone;
+    var _objects:FlxTypedGroup<object.Object>;
 
-    public function new(drone:object.Drone) {
+    public function new(drone:object.Drone, objects:FlxTypedGroup<object.Object>) {
         // super();
 
         var array:Array<Int>;
 
         _drone = drone;
+        _objects = objects;
 
 		// Basic level structure
 		_map = new FlxOgmoLoader("assets/data/room-002.oel");
@@ -46,6 +48,9 @@ class Level
         if (entityName == "drone") {
             _drone.x = x;
             _drone.y = y;
+        }
+        if (entityName == "box") {
+            _object.add(new object.Box(x, y));
         }
     }
 }

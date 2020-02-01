@@ -28,17 +28,18 @@ class PlayState extends FlxState
 	{
         _drone = new object.Drone(0, 0);
 
-        _map = new Level(_drone);
+        _players = new FlxGroup();
+        _players.add(_drone);
+
+        _objects = new FlxGroup();
+
+        _map = new Level(_drone, _objects);
         // _hud = new Hud(_player, this);
 
 		add(_map._mWalls);
         add(_map._mFloor);
         add(_drone);
         // add(_hud);
-        
-        _players = new FlxGroup();
-		_players.add(_drone);
-        
         /* Cameras */
         _gameCamera = new FlxCamera(0, 0, 1600, 900);
         _uiCamera = new FlxCamera(0, 0, 1600, 900);
