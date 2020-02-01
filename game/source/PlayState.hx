@@ -26,7 +26,6 @@ class PlayState extends FlxState
 
 	override public function create():Void
 	{
-
         _drone = new object.Drone(0, 0);
 
         _map = new Level(_drone);
@@ -36,10 +35,10 @@ class PlayState extends FlxState
         add(_map._mFloor);
         add(_drone);
         // add(_hud);
-
+        
         _players = new FlxGroup();
 		_players.add(_drone);
-
+        
         /* Cameras */
         _gameCamera = new FlxCamera(0, 0, 1600, 900);
         _uiCamera = new FlxCamera(0, 0, 1600, 900);

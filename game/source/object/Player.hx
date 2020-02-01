@@ -19,13 +19,6 @@ class Player extends FlxSprite {
 	public function new(X:Float, Y:Float) {
 		super(X, Y);
 
-		loadGraphic("assets/images/player.png", true, 8, 8);
-		setFacingFlip(FlxObject.LEFT, true, false);
-		setFacingFlip(FlxObject.RIGHT, false, false);
-
-		animation.add("idle", [0], 10, true);
-		animation.add("walk", [0, 1], 10, true);
-
 		maxVelocity.set(120, 300);
 		acceleration.y = 300;
 		drag.x = maxVelocity.x * 4;
