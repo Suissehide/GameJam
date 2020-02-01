@@ -32,5 +32,6 @@
   <entities>
     <meca id="0" x="256" y="256" />
     <drone id="1" x="352" y="320" />
+    <box id="3" x="352" y="340" />
   </entities>
 </level>
