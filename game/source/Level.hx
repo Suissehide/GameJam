@@ -17,17 +17,17 @@ class Level
     public var _mFloor:FlxTilemap;
 
     var _map:FlxOgmoLoader;
-    var _player:Player;
+    var _drone:object.Drone;
 
-    public function new(player:Player) {
+    public function new(drone:object.Drone) {
         // super();
 
         var array:Array<Int>;
 
-        _player = player;
+        _drone = drone;
 
 		// Basic level structure
-		_map = new FlxOgmoLoader("assets/data/room-1.oel");
+		_map = new FlxOgmoLoader("assets/data/room-002.oel");
 		_mWalls = _map.loadTilemap("assets/images/tileset_test.png", 32, 32, "walls");
 		_mWalls.follow();
         for (i in 1...120)
@@ -43,9 +43,9 @@ class Level
     function placeEntities(entityName:String, entityData:Xml):Void {
         var x:Int = Std.parseInt(entityData.get("x"));
         var y:Int = Std.parseInt(entityData.get("y"));
-        if (entityName == "player") {
-            _player.x = x;
-            _player.y = y;
+        if (entityName == "drone") {
+            _drone.x = x;
+            _drone.y = y;
         }
     }
 }

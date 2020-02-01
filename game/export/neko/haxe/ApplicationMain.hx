@@ -19,7 +19,7 @@ class ApplicationMain
 
 		#if (js && html5)
 		#if (munit || utest)
-		lime.system.System.embed("game", null, 640, 480);
+		lime.system.System.embed("game", null, 1600, 900);
 		#end
 		#else
 		create(null);
@@ -32,10 +32,10 @@ class ApplicationMain
 
 		ManifestResources.init(config);
 
-		app.meta["build"] = "1";
-		app.meta["company"] = "HaxeFlixel";
+		app.meta["build"] = "4";
+		app.meta["company"] = "Qwetle";
 		app.meta["file"] = "game";
-		app.meta["name"] = "game";
+		app.meta["name"] = "GameJam";
 		app.meta["packageName"] = "com.example.myapp";
 		app.meta["version"] = "0.0.1";
 
@@ -51,14 +51,14 @@ class ApplicationMain
 			element: null,
 			frameRate: 60,
 			#if !web fullscreen: false, #end
-			height: 480,
+			height: 900,
 			hidden: #if munit true #else false #end,
 			maximized: false,
 			minimized: false,
 			parameters: {},
 			resizable: true,
-			title: "game",
-			width: 640,
+			title: "GameJam",
+			width: 1600,
 			x: null,
 			y: null,
 		};
