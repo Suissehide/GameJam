@@ -8,40 +8,40 @@ import flixel.util.FlxSpriteUtil;
 import flixel.group.FlxGroup.FlxTypedGroup;
 
 class Player extends FlxSprite {
-	var SPEED:Float = 1;
-
-	public var _isMoving:Bool = false;
-	public var _alive:Bool = true;
-
-	var direction_move:Array<Bool> = [false, false, false, false];
-	var number_anim:Float = 0;
+    public var name:String = "None";
+    
+    var _key:Array<Array<flixel.input.keyboard.FlxKey>> = [[RIGHT], [LEFT], [UP], [DOWN]];
+	var _directionMove:Array<Bool> = [false, false, false, false];
+	var _numberAnim:Float = 0;
+    var _isMoving:Bool = false;
+    var _isWinning:Bool = false;
 
 	public function new(X:Float, Y:Float) {
 		super(X, Y);
 
 		maxVelocity.set(120, 300);
-		acceleration.y = 300;
+		acceleration.y = 100;
 		drag.x = maxVelocity.x * 4;
 	}
 
 	public function getInput(level:Level):Void {
-        direction_move = [false, false, false, false];
-        _isMoving = false;
+		_directionMove = [false, false, false, false];
+		_isMoving = false;
 
-		if (FlxG.keys.anyPressed([RIGHT, D])) { // go right
+		if (FlxG.keys.anyPressed(_key[0])) {        // go right
 			facing = FlxObject.LEFT;
-            direction_move[0] = true;
-            _isMoving = true;
-        } else if (FlxG.keys.anyPressed([LEFT, Q])) { // go left
+			_directionMove[0] = true;
+			_isMoving = true;
+		} else if (FlxG.keys.anyPressed(_key[1])) { // go left
 			facing = FlxObject.RIGHT;
-            direction_move[1] = true;
-            _isMoving = true;
-        }
-        if (FlxG.keys.anyPressed([UP, Z]) // go up
-			&& isTouching(FlxObject.FLOOR)) {
-			direction_move[2] = true;
-        } else if (FlxG.keys.anyPressed([DOWN, S])) { // go down
-			direction_move[3] = true;
+			_directionMove[1] = true;
+			_isMoving = true;
+		}
+		if (FlxG.keys.anyPressed(_key[2])           // go up
+			&& isTouching(FlxObject.FLOOR) && !isTouching(FlxObject.CEILING)) {
+			_directionMove[2] = true;
+		} else if (FlxG.keys.anyPressed(_key[3])) { // go down
+			_directionMove[3] = true;
 		}
 	}
 
@@ -52,30 +52,30 @@ class Player extends FlxSprite {
 			animation.play("idle");
 
 		acceleration.x = 0;
-		if (direction_move[0])
+		if (_directionMove[0])
 			acceleration.x = maxVelocity.x * 4;
-		if (direction_move[1])
+		if (_directionMove[1])
 			acceleration.x = -maxVelocity.x * 4;
-		if (direction_move[2])
+		if (_directionMove[2])
 			velocity.y = -maxVelocity.y / 2;
 
-    	super.update(elapsed);
-}
+		super.update(elapsed);
+	}
 
-override public function kill():Void {
-	if (!alive)
-		return;
+	override public function kill():Void {
+		if (!alive)
+			return;
 
-	super.kill();
-	FlxSpriteUtil.flicker(this, 1, 0.04, true);
+		super.kill();
+		FlxSpriteUtil.flicker(this, 1, 0.04, true);
 
-	FlxG.camera.shake(0.007, 0.25);
-	FlxG.camera.flash(0xffd8eba2, 0.65, turnOffSlowMo);
-	FlxG.timeScale = 0.35;
-}
+		FlxG.camera.shake(0.007, 0.25);
+		FlxG.camera.flash(0xffd8eba2, 0.65, turnOffSlowMo);
+		FlxG.timeScale = 0.35;
+	}
 
-function turnOffSlowMo():Void {
-	FlxG.timeScale = 1.0;
-	_alive = false;
-}
+	function turnOffSlowMo():Void {
+		FlxG.timeScale = 1.0;
+		alive = false;
+	}
 }
